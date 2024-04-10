@@ -30,18 +30,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Assuming you have a setup to render views with EJS
+
 app.get('/view-database', async (req, res) => {
     try {
-        // Fetch all employees
+        // Fetch all employees and departments
         const employees = await db.Employee.findAll({
-            include: [db.Department]
+            include: [{ model: db.Department }]
         });
-
-        // Fetch all departments
         const departments = await db.Department.findAll();
 
-        // Pass both employees and departments to the view
+        // Pass data to the EJS template
         res.render('view-database', { employees, departments });
     } catch (error) {
         console.error('Error fetching data:', error);
