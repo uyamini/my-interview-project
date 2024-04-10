@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
-// Importing the db object from models/index.js
+//Importing the db object from models/index.js
 const db = require('./models');
 const { Employee, Department } = db;
 
@@ -20,10 +20,12 @@ Employee.belongsTo(Department, { foreignKey: 'department_id' });
 // Import route modules
 const employeesRoutes = require('./routes/employees');
 const departmentsRoutes = require('./routes/departments');
+const apiRoutes = require('./routes/api');
 
 // Use routes
 app.use(employeesRoutes);
 app.use(departmentsRoutes);
+app.use(apiRoutes);
 
 // Root route serving the main HTML page
 app.get('/', (req, res) => {
@@ -46,19 +48,6 @@ app.get('/view-database', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
-//Example route to fetch data from an API
-app.get('/view-api', async (req, res) => {
-    try {
-        const response = await axios.get('https://api.example.com/data'); // Replace with actual API URL
-        const apiData = response.data;
-        res.render('view-api', { apiData }); // Render a view named 'view-api.ejs'
-    } catch (error) {
-        console.error('Error fetching API data:', error);
-        res.status(500).send('Server Error');
-    }
-});
-
 
 // Syncing the database and starting the server
 db.sequelize.sync().then(() => {
