@@ -1,0 +1,18 @@
+<!-- views/view-api.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Data</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body>
+    <h1>Data from External API</h1>
+    <div>
+        <!-- Render your API data here. Example: -->
+        <% apiData.forEach(data => { %>
+            <p><%= data.name %></p> <!-- Adjust according to the structure of your API data -->
+        <% }); %>
+    </div>
+</body>
+</html>

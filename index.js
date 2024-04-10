@@ -30,6 +30,38 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Assuming you have a setup to render views with EJS
+app.get('/view-database', async (req, res) => {
+    try {
+        // Fetch all employees
+        const employees = await db.Employee.findAll({
+            include: [db.Department]
+        });
+
+        // Fetch all departments
+        const departments = await db.Department.findAll();
+
+        // Pass both employees and departments to the view
+        res.render('view-database', { employees, departments });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
+//Example route to fetch data from an API
+app.get('/view-api', async (req, res) => {
+    try {
+        const response = await axios.get('https://api.example.com/data'); // Replace with actual API URL
+        const apiData = response.data;
+        res.render('view-api', { apiData }); // Render a view named 'view-api.ejs'
+    } catch (error) {
+        console.error('Error fetching API data:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 // Syncing the database and starting the server
 db.sequelize.sync().then(() => {
     console.log("DB Synced");

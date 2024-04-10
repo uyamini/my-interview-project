@@ -1,3 +1,4 @@
+//models/employee.js
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Employee', {
         employee_id: {

@@ -1,0 +1,28 @@
+<!-- views/view-database.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Data</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body>
+    <h1>Database Data</h1>
+    <section>
+        <h2>Employees</h2>
+        <ul>
+            <% employees.forEach(employee => { %>
+                <li><%= employee.first_name %> <%= employee.last_name %> - <%= employee.Department.name %></li>
+            <% }); %>
+        </ul>
+    </section>
+    <section>
+        <h2>Departments</h2>
+        <ul>
+            <% departments.forEach(department => { %>
+                <li><%= department.name %>: <%= department.location %></li>
+            <% }); %>
+        </ul>
+    </section>
+</body>
+</html>

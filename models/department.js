@@ -1,3 +1,4 @@
+//models/department.js
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Department', {
         department_id: {
